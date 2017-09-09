@@ -1,0 +1,10 @@
+<h1><%= @post.id ? 'Edit Post' : 'New Post' %></h1>
+
+<%= form_for @post do |f| %>
+  <%= f.label :image %>
+  <%= f.text_field :image %>
+  <br>
+  <%= f.label :caption %>
+  <%= f.text_field :caption %>
+  <%= f.submit %>
+<% end %>

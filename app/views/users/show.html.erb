@@ -1,0 +1,21 @@
+<h1><%= current_user.user_name %></h1>
+
+<p><%= current_user.bio.description %></p>
+<img src="<%= current_user.bio.profile_image %>" alt="">
+<hr>
+
+<% current_user.posts.each do |post| %>
+<h3><%= current_user.user_name %></h3>
+<img src="<%= post.image %>" alt="">
+<p><%=current_user.user_name  + ': ' + post.caption %></p>
+<p>Likes: <%= post.likes.to_s %></p>
+<%= link_to 'Like', like_path(post.id) %>
+<%= link_to 'Add A Comment', new_post_comment_path(post) %>
+<hr>
+<% end %>
+
+
+
+<%= link_to 'New Post', new_post_path %>
+<%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
+<%= link_to 'Edit Bio', edit_user_bio_path(current_user, current_user.bio) %>

@@ -1,0 +1,7 @@
+<%= @comment.id ? 'Edit Comment' : 'Add Comment' %>
+
+<%= form_for ([@post, @comment]) do |f| %>
+<%= f.label :text %>
+<%= f.text_field :text, required: true, placeholder: 'Add Comment Here' %>
+<%= f.submit %>
+<% end %>

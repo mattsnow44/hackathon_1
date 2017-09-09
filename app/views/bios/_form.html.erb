@@ -1,0 +1,10 @@
+<h1>Bio for <%= current_user.user_name %></h1>
+
+<%= form_for([current_user, @bio]) do |f| %>
+  <%= f.label :description %>
+  <%= f.text_area :description, required: true %>
+  <br>
+  <%= f.label :profile_image %>
+  <%= f.text_field :profile_image, placeholder: 'Please paste an image URL' %>
+  <%= f.submit %>
+<% end %>
