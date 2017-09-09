@@ -9,8 +9,16 @@
 <img src="<%= post.image %>" alt="">
 <p><%=current_user.user_name  + ': ' + post.caption %></p>
 <p>Likes: <%= post.likes.to_s %></p>
+  <% post.comments.each do |comment| %>
+  <p><%= comment.user.user_name + ': ' + comment.text %></p>
+  <% end %>
 <%= link_to 'Like', like_path(post.id) %>
 <%= link_to 'Add A Comment', new_post_comment_path(post) %>
+<br>
+<% if post.user.id = current_user.id %>
+  <%= link_to 'Edit', edit_post_path(post) %>
+  <%= link_to 'Delete', post_path(post), method: :delete %>
+<% end %>
 <hr>
 <% end %>
 
@@ -19,3 +27,4 @@
 <%= link_to 'New Post', new_post_path %>
 <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
 <%= link_to 'Edit Bio', edit_user_bio_path(current_user, current_user.bio) %>
+<%= link_to 'Home', root_path %>

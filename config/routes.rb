@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  root 'users#show'
+  root 'posts#index'
 
   get 'user', to: 'users#show'
 
-  get 'posts/:id', to: 'posts#like', as: 'like'
+  get 'posts/:id/likes', to: 'posts#like', as: 'like'
 
   scope 'users/:id', as: 'user' do
     resources :bios

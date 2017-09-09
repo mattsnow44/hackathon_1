@@ -1,2 +1,26 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<h1>Welcome to SafetyGram!</h1>
+<h2><%= link_to current_user.user_name, user_path %></h2>
+<%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
+
+<% @posts.each do |post| %>
+<h3><%= post.user.user_name %></h3>
+<img src="<%= post.image %>" alt="">
+<p><%=post.user.user_name  + ': ' + post.caption %></p>
+<p>Likes: <%= post.likes.to_s %></p>
+  <% post.comments.each do |comment| %>
+  <p><%= comment.user.user_name + ': ' + comment.text %></p>
+  <% if comment.user_id == current_user.id %>
+    <%= link_to 'Edit Comment', edit_post_comment_path(post, comment) %>
+    <%= link_to 'Delete Comment', post_comment_path(post, comment), method: :delete %>
+    <% end %>
+  <% end %>
+  <br>
+<%= link_to 'Like', like_path(post.id) %>
+<%= link_to 'Add A Comment', new_post_comment_path(post) %>
+<br>
+<% if post.user_id == current_user.id %>
+  <%= link_to 'Edit', edit_post_path(post) %>
+  <%= link_to 'Delete', post_path(post), method: :delete %>
+<% end %>
+<hr>
+<% end %>
